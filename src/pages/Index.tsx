@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { MapPin, Clock, Shield, Phone, Star, ChevronRight } from 'lucide-react';
+import { MapPin, Clock, Shield, Phone, ChevronRight } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -60,50 +60,6 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Features Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-habal-dark">Why Choose Habal-Connect?</h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-              Experience the most convenient way to travel around Cotabato City
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-habal-primary/10 w-14 h-14 rounded-full flex items-center justify-center mb-4">
-                <Clock className="h-7 w-7 text-habal-primary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Fast Bookings</h3>
-              <p className="text-gray-600">
-                Get a ride in minutes with our quick booking system designed for busy people on the go.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-habal-secondary/10 w-14 h-14 rounded-full flex items-center justify-center mb-4">
-                <Shield className="h-7 w-7 text-habal-secondary" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Verified Drivers</h3>
-              <p className="text-gray-600">
-                All our drivers are thoroughly vetted and verified for your safety and peace of mind.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <div className="bg-habal-accent/10 w-14 h-14 rounded-full flex items-center justify-center mb-4">
-                <MapPin className="h-7 w-7 text-habal-accent" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">City Coverage</h3>
-              <p className="text-gray-600">
-                We cover all major areas in Cotabato City, ensuring you're never stranded.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
       {/* How It Works */}
       <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
@@ -152,93 +108,6 @@ const Index = () => {
                 Get Started Now <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-      
-      {/* Testimonials */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-habal-dark">What Our Users Say</h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-              Don't just take our word for it — here's what users think about Habal-Connect
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">
-                "Habal-Connect has made it so much easier to get around Cotabato City. The drivers are friendly and always on time!"
-              </p>
-              <div className="flex items-center">
-                <img 
-                  src="https://i.pravatar.cc/150?img=33" 
-                  alt="User" 
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-                <div>
-                  <p className="font-medium">Marina Santos</p>
-                  <p className="text-sm text-gray-500">Student</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">
-                "As a regular commuter, I find Habal-Connect very reliable. The app is user-friendly and the fare system is transparent."
-              </p>
-              <div className="flex items-center">
-                <img 
-                  src="https://i.pravatar.cc/150?img=45" 
-                  alt="User" 
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-                <div>
-                  <p className="font-medium">John Mendoza</p>
-                  <p className="text-sm text-gray-500">Office Worker</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(4)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
-                  ))}
-                  <Star className="h-4 w-4 text-gray-300" />
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">
-                "Being a driver with Habal-Connect has helped me earn extra income while providing a valuable service to my community."
-              </p>
-              <div className="flex items-center">
-                <img 
-                  src="https://i.pravatar.cc/150?img=52" 
-                  alt="User" 
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-                <div>
-                  <p className="font-medium">Roberto Dela Cruz</p>
-                  <p className="text-sm text-gray-500">Driver</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

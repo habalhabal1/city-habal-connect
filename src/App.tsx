@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 
 // Dashboard Pages
 import RiderDashboard from "./components/rider/RiderDashboard";
+import BookRide from "./components/rider/BookRide";
 import DriverDashboard from "./components/driver/DriverDashboard";
 import AdminDashboard from "./components/admin/AdminDashboard";
 
@@ -41,6 +42,7 @@ const App = () => (
             
             {/* Protected Routes - in a real app, these would be wrapped with auth protection */}
             <Route path="/rider-dashboard" element={<RiderDashboard />} />
+            <Route path="/rider-dashboard/book" element={<BookRide />} />
             <Route path="/driver-dashboard" element={<DriverDashboard />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             
