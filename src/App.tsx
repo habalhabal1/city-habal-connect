@@ -17,13 +17,20 @@ import RiderDashboard from "./components/rider/RiderDashboard";
 import DriverDashboard from "./components/driver/DriverDashboard";
 import AdminDashboard from "./components/admin/AdminDashboard";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1
+    }
+  }
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
-      <Sonner />
+      <Sonner position="top-right" closeButton={true} />
       <BrowserRouter>
         <AuthProvider>
           <Routes>
