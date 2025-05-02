@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { toast } from 'sonner';
+import { Switch } from '@/components/ui/switch';
 
 const DriverDashboard = () => {
   const { currentUser } = useAuth();
