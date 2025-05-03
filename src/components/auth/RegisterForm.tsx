@@ -75,7 +75,26 @@ const RegisterForm = () => {
   const onSubmitRider = async (values: z.infer<typeof riderFormSchema>) => {
     try {
       setIsSubmitting(true);
+      
+      // For rider registration, pass the contact number in userData if provided
+      const userData = {
+        name: values.name,
+        role: 'rider' as UserRole
+      };
+      
       await registerUser(values.name, values.email, values.password, 'rider');
+      
+      // If there's a contact number, update the profile after registration
+      if (values.contactNumber) {
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (sessionData?.session?.user) {
+          await supabase
+            .from('profiles')
+            .update({ contact_number: values.contactNumber })
+            .eq('id', sessionData.session.user.id);
+        }
+      }
+      
     } catch (error) {
       console.error('Registration failed:', error);
     } finally {

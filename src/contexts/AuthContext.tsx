@@ -129,6 +129,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true);
     
     try {
+      console.log(`Registering user with role: ${role}`);
       // Make sure the role is passed as a string value that matches the user_role enum in the database
       const { data, error } = await supabase.auth.signUp({
         email,
