@@ -129,6 +129,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(true);
     
     try {
+      // Make sure the role is passed as a string value that matches the user_role enum in the database
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -148,6 +149,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       
       // Redirect will happen automatically once the auth state changes
     } catch (error: any) {
+      console.error("Registration error:", error);
       toast.error(error.message || 'Failed to create account');
       throw error;
     } finally {
