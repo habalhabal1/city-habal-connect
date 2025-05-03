@@ -6,34 +6,34 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useAuth, UserRole } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 import { Link } from 'react-router-dom';
+import { AlertCircle, Info } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
-  role: z.enum(['rider', 'driver', 'admin']),
 });
 
 const LoginForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const { login } = useAuth();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
       password: '',
-      role: 'rider',
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setIsSubmitting(true);
-      await login(values.email, values.password, values.role as UserRole);
+      await login(values.email, values.password);
     } catch (error) {
       console.error('Login failed:', error);
     } finally {
@@ -89,36 +89,6 @@ const LoginForm = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>I am a</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0"
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="rider" id="rider" />
-                        <Label htmlFor="rider">Rider</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="driver" id="driver" />
-                        <Label htmlFor="driver">Driver</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="admin" id="admin" />
-                        <Label htmlFor="admin">Admin</Label>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <Button 
               type="submit"
               className="w-full bg-habal-primary hover:bg-habal-dark"
@@ -130,13 +100,35 @@ const LoginForm = () => {
         </Form>
       </CardContent>
       <CardFooter className="flex flex-col space-y-4">
-        <div className="text-center text-sm text-muted-foreground">
-          <p className="mb-1">Demo Accounts:</p>
-          <p><strong>Rider:</strong> rider@example.com</p>
-          <p><strong>Driver:</strong> driver@example.com</p>
-          <p><strong>Admin:</strong> admin@example.com</p>
-          <p className="mt-1"><strong>Password:</strong> password123 (for all accounts)</p>
-        </div>
+        {showAdvanced ? (
+          <Alert variant="default" className="bg-gray-50 dark:bg-gray-800 border-gray-200">
+            <Info className="h-4 w-4" />
+            <AlertTitle>Admin & Driver Access</AlertTitle>
+            <AlertDescription>
+              <p className="mb-1">Access credentials:</p>
+              <p><strong>Admin:</strong> admin@example.com</p>
+              <p><strong>Driver:</strong> driver@example.com</p>
+              <p className="mt-1"><strong>Password:</strong> password123 (for all accounts)</p>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="mt-2" 
+                onClick={() => setShowAdvanced(false)}
+              >
+                Hide
+              </Button>
+            </AlertDescription>
+          </Alert>
+        ) : (
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-xs text-muted-foreground" 
+            onClick={() => setShowAdvanced(true)}
+          >
+            Admin & Driver Access
+          </Button>
+        )}
         <div className="text-center text-sm">
           <span>Don't have an account? </span>
           <Link to="/register" className="text-habal-primary hover:underline">
